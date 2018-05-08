@@ -43,10 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums.cs" />
-    <Compile Include="Extensions.cs" />
     <Compile Include="Objects\Card.cs" />
+    <Compile Include="Objects\Deck.cs" />
     <Compile Include="Objects\DeckCreator.cs" />
     <Compile Include="Objects\GameManager.cs" />
+    <Compile Include="Objects\NullTextWriter.cs" />
     <Compile Include="Objects\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
