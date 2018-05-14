@@ -20,21 +20,21 @@ namespace CardGameWar.Objects
 
         public Deck<Card> Deal(Deck<Card> cards)
         {
-            var player1cards = new Deck<Card>();
-            var player2cards = new Deck<Card>();
+            var owncards = new Deck<Card>();
+            var opponentscards = new Deck<Card>();
 
-            bool forOne = false;
+            bool forMe = false;
             foreach (var card in cards)
             {
-                if (forOne) //Card etiquette says the player who is NOT the dealer gets first card
-                    player1cards.Push(card);
+                if (forMe)   //Card etiquette says the player who is NOT the dealer gets first card 
+                    owncards.Push(card);
                 else
-                    player2cards.Push(card);
-                forOne = !forOne;
+                    opponentscards.Push(card);
+                forMe = !forMe;
                 }
 
-            Deck = player1cards;
-            return player2cards;
+            Deck = owncards;
+            return opponentscards;
         }
 
         public override string ToString()

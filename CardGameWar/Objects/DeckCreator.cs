@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CardGameWar.Objects
 {
@@ -23,24 +24,30 @@ namespace CardGameWar.Objects
             return Shuffle(cards, seed);
         }
 
-        private static Deck<Card> Shuffle(List<Card> cards, int seed = 0)
+        private static Random _rnd;
+
+        public static Deck<Card> Shuffle(IEnumerable<Card> cards, int seed = 0)
         {
             if (seed == 0)
                 seed = DateTime.Now.Millisecond;
+            List<Card> transformedCards = cards.ToList();
             //First, shuffle the existing cards using Fisher-Yates
-            Random r = new Random(seed);
-            for (int n = cards.Count - 1; n > 0; --n)
+
+            if (_rnd == null)
+                    _rnd = new Random(seed);
+
+            for (int n = transformedCards.Count - 1; n > 0; --n)
             {
-                //Step 2: Randomly pick a card which has not been shuffled
-                int k = r.Next(n + 1);
+                //Step 2: Randomly pick an item which has not been shuffled
+                int k = _rnd.Next(n + 1);
 
                 //Step 3: Swap the selected item with the last "unstruck" letter in the collection
-                Card temp = cards[n];
-                cards[n] = cards[k];
-                cards[k] = temp;
+                Card temp = transformedCards[n];
+                transformedCards[n] = transformedCards[k];
+                transformedCards[k] = temp;
             }
 
-            return new Deck<Card>(cards);
+            return new Deck<Card>(transformedCards);
             }
 
 
